@@ -1,0 +1,3 @@
+# ssp
+
+Simple Status Page
