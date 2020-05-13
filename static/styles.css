@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "CaveatBrush-Regular";
+  font-weight: normal;
+  font-style: normal;
+  src: local('CaveatBrush Regular'), local('CaveatBrush-Regular'),
+  url('./fonts/CaveatBrush-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('./fonts/CaveatBrush-Regular.woff') format('woff'), /* Modern Browsers */
+  url('./fonts/CaveatBrush-Regular.woff2') format('woff2'); /* Modern Browsers */
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('Open-Sans-Italic'),
+  url('./fonts/OpenSans-Italic.ttf') format('truetype'),
+  url('./fonts/OpenSans-Italic.woff') format('woff'),
+  url('./fonts/OpenSans-Italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('Open-Sans-Bold'),
+  url('./fonts/OpenSans-Bold.ttf') format('truetype'),
+  url('./fonts/OpenSans-Bold.woff') format('woff'),
+  url('./fonts/OpenSans-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans Regular'), local('Open-Sans-Regular'),
+  url('./fonts/OpenSans-Regular.ttf') format('truetype'),
+  url('./fonts/OpenSans-Regular.woff') format('woff'),
+  url('./fonts/OpenSans-Regular.woff2') format('woff2');
+}
+/*****************************************************************************/
+html {
+  scroll-behavior: smooth;
+  text-align:center;
+}
+body {
+  color: #3d3d3d;
+  background-color: #e8e8e8;
+  font-family: 'Open Sans';
+}
+
+.green {color: green;}
+.red {color: red;}
+a {color:#3d3d3d;}
+textarea {width:90%;height:8em;white-space: pre-wrap;}
+.txt-rendering {white-space: pre-line;margin-top: -1em;}
+
+header h1 {
+  font-family: 'CaveatBrush-Regular';
+  font-size: 3em;
+  text-align: center;
+}
+header h1 a {
+  text-decoration: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.report {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #EEE;
+  color: #111;
+  width:90%;
+  margin:2em auto;
+  border-radius: 1em;
+  border: solid 1px grey;
+}
+
+.report-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 0 0.2em;
+  text-align:left;
+}
+.report-date {
+  flex: 10;
+  align-self: center;
+}
+.report-state {
+  flex: 1;
+  align-self: center;
+}
+.report-messages {
+  flex: 3;
+  padding: 0.2em 1em;
+  text-align:center;
+}
+.shortline {width:50%;}
+.message-date {font-weight: bold;}
+
+footer {
+  margin: 1em 0;
+  text-align:center;
+  color:#3d3d3d;
+  font-weight: bold;
+  font-size:1.1em;
+}
+footer a {
+  text-decoration: none;
+}
+
+/******************************************************************************/
+@media (min-width: 400px){
+
+}
+@media (min-width: 550px) {
+  .report {
+    width:80%;
+  }
+  textarea {width:80%;}
+  }
+@media (min-width: 750px) {
+  .report {
+    flex-direction: row;
+    width:70%;
+    margin:2em auto;
+  }
+  .report-messages {
+    border-left: solid 1px grey;
+  }
+  textarea {width:70%;}
+}
+@media (min-width: 1000px){
+  .report {
+    width:65%;
+  }
+  .shortline {width:25%;}
+  textarea {width:65%;}
+}
+@media (min-width: 1200px){
+  .report {
+    width:60%;
+  }
+  textarea {width:60%;}
+}
