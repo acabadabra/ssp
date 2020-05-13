@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+{% block title %}acab.io::status{% endblock %}
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+  <h2>{{ page_title }}</h2>
+
+  {% for report in reports %}
+
+  {% set day = report.DATE|split(' ') %}
+  {% set descriptions = report.MSGDESCRIPTION|split('|') %}
+  {% set id = report.MSGID|split('|') %}
+  {% set date = report.MSGDATE|split('|') %}
+  {% set nbcycle = descriptions|length-1 %}
+
+  <article class="report">
+    <div class="report-details">
+      <p class=report-date>
+        <span class="message-date">{{ day[0] }}<br />
+        {{ day[1] }}</span>
+      </p>
+      <p class=report-state>
+        {% if report.STATE == false %}
+          <span class="red"><i class="fas fa-bug"></i> In progress...</span>
+        {% else %}
+          <span class="green"><i class="far fa-check-circle"></i> Resolved</span>
+        {% endif %}
+      </p>
+    </div>
+    <div class="report-messages">
+    <h3>{{ report.TITLE }}</h3>
+    <p>{{ report.MAINDESCRIPTION }}</p>
+    {% if cycle(date, i) is not empty %}
+      {% for i in 0..nbcycle %}
+        <hr class="shortline"/>
+        <p>
+          <span class="message-date">{{ cycle(date, i) }}</span>
+        </p>
+        <p class="txt-rendering">
+          {{ cycle(descriptions, i) }}
+        </p>
+      {% endfor %}
+    {% endif %}
+    </div>
+
+  </article>
+  {% endfor %}
+
+{% endblock %}

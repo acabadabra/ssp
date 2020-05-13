@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	{% block head %}
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="static/normalize.css" />
+		<link rel="stylesheet" href="static/all.min.css" >
+		<link rel="stylesheet" href="static/styles.css" />
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+	{% endblock %}
+</head>
+<body>
+	<header>
+		<h1><a href="./index.php">acab.io::status</a></h1>
+	</header>
+
+	<section>
+		{% if message is not empty %}
+			<p class="red">
+				{{message}}
+			</p>
+		{% endif %}
+		
+		{% block content %}{% endblock %}
+	</section>
+
+	<footer>
+		{% block footer %}
+			<a href="https://status.acab.io/">acab.io::status</a>
+		{% endblock %}
+	</footer>
+</body>
+</html>

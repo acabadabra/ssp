@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+{% block title %}acab.io::status / admin{% endblock %}
+{% block head %}
+  {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+  <h2>Add report</h2>
+  <form method="GET" action="controller.php">
+    <input type="hidden" name="action" value="add">
+    <p>
+      <label for="date">Date :</label>
+      <input type="datetime-local" value="{{now}}" name="date" required>
+    </p>
+    <p>
+      <label for="title">Title :</label>
+      <input type="text" name="title" value="Report title" required></p>
+    <p>
+      <label for="maindescription">Description :</label><br />
+      <textarea name="maindescription" placeholder="Type your message here !" required></textarea><br />
+    </p>
+    <button type="submit">
+      <i class="fas fa-plus"></i>
+    </button>
+  </form>
+
+  <h2>{{ page_title }}</h2>
+  <p><a href="./controller.php?action=listall">Show all reports</a></p>
+  
+  {% for report in reports %}
+
+  {% set day = report.DATE|split(' ') %}
+  {% set descriptions = report.MSGDESCRIPTION|split('|') %}
+  {% set id = report.MSGID|split('|') %}
+  {% set date = report.MSGDATE|split('|') %}
+  {% set nbcycle = descriptions|length-1 %}
+
+  <article class="report">
+    <div class="report-details">
+      <p class=report-date>
+        <span class="message-date">{{ day[0] }}<br />
+        {{ day[1] }}</span>
+      </p>
+      <p class=report-state>
+        {% if report.STATE == false %}
+          <span class="red"><i class="fas fa-bug"></i> In progress...</span>
+        {% else %}
+          <span class="green"><i class="far fa-check-circle"></i> Resolved</span>
+        {% endif %}
+      </p>
+    </div>
+    <div class="report-messages">
+      <h3>
+        <a href="controller.php?action=detail&id={{report.ID}}&message="><i class="far fa-edit"></i></a>
+        {{ report.TITLE }}
+        <a href="controller.php?action=suppr&id={{report.ID}}"><i class="fas fa-trash"></i></a>
+      </h3>
+      <p>{{ report.MAINDESCRIPTION }}</p>
+      {% if cycle(date, i) is not empty %}
+        {% for i in 0..nbcycle %}
+          <hr class="shortline"/>
+          <p>
+            <span class="message-date">{{ cycle(date, i) }}</span>
+          </p>
+          <p class="txt-rendering">
+            {{ cycle(descriptions, i) }} <br /> <a href="controller.php?action=suppr_description&id={{ cycle(id, i) }}"><i class="fas fa-trash"></i></a>
+          </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+  
+{% endblock %}
