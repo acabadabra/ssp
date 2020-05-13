@@ -1,0 +1,16 @@
+
+### Composer ###
+composer.phar
+composer
+composer.lock
+/vendor/
+
+### Font ###
+static/fonts/*.ttf
+static/fonts/*.eot
+static/fonts/*.svg
+static/fonts/*.woff
+static/fonts/*.woff2
+
+### SQLite ###
+db/*.sqlite3
