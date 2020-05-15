@@ -23,7 +23,7 @@ It can easily be used by other projects.
 
 ## TODO
 
-- RSS feed
+- ~~RSS feed~~
 - ~~Keep new line on textarea~~
 - Use a config file
 - Internationalize
