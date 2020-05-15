@@ -37,7 +37,7 @@ function Listrss_action($cont,$twig,$message)
         'message' => $message,
         )
     );
-    $xmlfile = fopen('rss.xml', 'r+');
+    $xmlfile = fopen('rss.xml', 'w+');
     fseek($xmlfile, 0);
     fputs($xmlfile, $content);
     fclose($xmlfile);
