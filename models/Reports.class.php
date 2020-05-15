@@ -38,6 +38,21 @@ class Reports {
 	  return $data;
 	}
 
+	/** Get last 10 entries */
+	function get_rss()
+	{
+		$sql="SELECT REPORTS.DATE, REPORTS.TITLE, REPORTS.MAINDESCRIPTION, REPORTS.STATE,
+						GROUP_CONCAT(REPORT_DETAILS.DATE,'|') AS MSGDATE,
+						GROUP_CONCAT(REPORT_DETAILS.DESCRIPTION,'|') AS MSGDESCRIPTION
+					FROM REPORTS
+					LEFT JOIN REPORT_DETAILS ON REPORT_ID = REPORTS.ID
+					GROUP BY REPORTS.ID
+					ORDER BY REPORTS.DATE DESC
+					LIMIT 10";
+	  $data=self::$db->query($sql);
+	  return $data;
+	}
+
 	/** Get last 5 entries */
 	function get_last_reports()
 	{
