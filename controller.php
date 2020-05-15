@@ -1,5 +1,5 @@
 <?php
-require_once 'models/model.php';
+require_once 'models/Reports.class.php';
 $cont = new Reports;
 include 'vendor/autoload.php';
 // Templates location
@@ -16,6 +16,9 @@ $now = date("Y-m-d H:i:s");
 switch ($action) {
     case "listpublic":
       listpublic_action($cont,$twig,$message);
+      break;
+    case "listrss":
+      listrss_action($cont,$twig,$message);
       break;
     case "listlast":
       require_auth();
@@ -35,6 +38,7 @@ switch ($action) {
         $message = "Report successfully removed ! !";
       else $message = "Something went wrong !";
       listlast_action($cont,$twig,$message,$now);
+      listrss_action($cont,$twig,$message);
       break;
     case "suppr_description":
       require_auth();
@@ -42,6 +46,7 @@ switch ($action) {
         $message = "Report detail successfully removed ! !";
       else $message = "Something went wrong !";
       listlast_action($cont,$twig,$message,$now);
+      listrss_action($cont,$twig,$message);
       break;
     case "update":
       require_auth();
@@ -52,6 +57,7 @@ switch ($action) {
       else
         $message = "Something went wrong !";
       listlast_action($cont,$twig,$message,$now);
+      listrss_action($cont,$twig,$message);
       break;
 	  case "add":
       require_auth();
@@ -59,6 +65,7 @@ switch ($action) {
 		       $message = "Report successfully added !";
 	    else $message = "Something went wrong !";
       listlast_action($cont,$twig,$message,$now);
+      listrss_action($cont,$twig,$message);
       break;
     case "add_description":
       require_auth();
@@ -66,6 +73,7 @@ switch ($action) {
         $message = "Report detail successfully added !";
       else $message = "Something went wrong !";
       listlast_action($cont,$twig,$message,$now);
+      listrss_action($cont,$twig,$message);
       break;
     default:
       listpublic_action($cont,$twig,$message,$now);
