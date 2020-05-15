@@ -4,8 +4,8 @@
 <title>{{ page_title }}</title>
 <link>{{ page_url }}</link>
 <atom:link href="{{ page_url }}/rss.xml" rel="self" type="application/rss+xml"></atom:link>
-<description>RSS feed</description>
-<language>en-us</language>
+<description>Be inform when a problem occur on any acab.io services.</description>
+<language>en-gb</language>
 {% for report in reports %}
 {% if loop.first %}
 {% set datemsg = report.MSGDATE|split('|') %}
@@ -13,13 +13,13 @@
 {% if cycle(datemsg, i) is not empty %}
 {% for i in 0..datecycle %}
 {% if loop.last %}
-<pubDate>{{ cycle(datemsg, i)|date("D, d M Y H:i:s T") }}</pubDate>
-<lastBuildDate>{{ cycle(datemsg, i)|date("D, d M Y H:i:s T") }}</lastBuildDate>
+<pubDate>{{ cycle(datemsg, i)|date('D, d M y H:i:s O') }}</pubDate>
+<lastBuildDate>{{ cycle(datemsg, i)|date('D, d M y H:i:s O') }}</lastBuildDate>
 {% endif %}
 {% endfor %}
 {% else %}
-<pubDate>{{ report.DATE|date("D, d M Y H:i:s T") }}</pubDate>
-<lastBuildDate>b{{ report.DATE|date("D, d M Y H:i:s T") }}</lastBuildDate>
+<pubDate>{{ report.DATE|date('D, d M y H:i:s O') }}</pubDate>
+<lastBuildDate>{{ report.DATE|date('D, d M y H:i:s O') }}</lastBuildDate>
 {% endif %}
 {% endif %}
 {% set descriptions = report.MSGDESCRIPTION|split('|') %}
@@ -29,17 +29,19 @@
 {% for i in 0..nbcycle %}
 <item>
 <title>{{ report.TITLE }}</title>
-<description>{{ cycle(descriptions, i) }}</description>
-<pubDate>{{ cycle(date, i)|date("D, d M Y H:i:s T") }}</pubDate>
 <link>{{ page_url }}</link>
+<description>{{ cycle(descriptions, i) }}</description>
+<pubDate>{{ cycle(date, i)|date('D, d M y H:i:s O') }}</pubDate>
+<guid>https://status.acab.io/msg-{{ report.MSGID }}</guid>
 </item>
 {% endfor %}
 {% endif %}
 <item>
 <title>{{ report.TITLE }}</title>
-<description>{{ report.MAINDESCRIPTION }}</description>
-<pubDate>{{ report.DATE|date("D, d M Y H:i:s T") }}</pubDate>
 <link>{{ page_url }}</link>
+<description>{{ report.MAINDESCRIPTION }}</description>
+<pubDate>{{ report.DATE|date('D, d M y H:i:s O') }}</pubDate>
+<guid>https://status.acab.io/report-{{ report.ID }}</guid>
 </item>
 {% endfor %}
 </channel>
