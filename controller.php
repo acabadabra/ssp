@@ -9,78 +9,78 @@ $twig = new Twig\Environment($loader);
 
 require 'controller.inc.php';
 // Checking actions and parameters
-// default to listpublic
+// default to Listpublic
 $action = $_GET['action'] ?? 'listpublic';
 $message = "";
 $now = date("Y-m-d H:i:s");
 switch ($action) {
 case "listpublic":
-    listpublic_action($cont, $twig, $message);
+    Listpublic_action($cont, $twig, $message);
     break;
 case "listrss":
-    listrss_action($cont, $twig, $message);
+    Listrss_action($cont, $twig, $message);
     break;
 case "listlast":
-    require_auth();
-    listlast_action($cont, $twig, $message, $now);
+    Require_auth();
+    Listlast_action($cont, $twig, $message, $now);
     break;
 case "listall":
-    require_auth();
-    listall_action($cont, $twig, $message, $now);
+    Require_auth();
+    Listall_action($cont, $twig, $message, $now);
     break;
 case "detail":
-    require_auth();
-    detail_action($cont, $twig, $now, $_GET['id']);
+    Require_auth();
+    Detail_action($cont, $twig, $now, $_GET['id']);
     break;
 case "suppr":
-    require_auth();
-    if (suppr_action($cont, $_GET['id'])) {
+    Require_auth();
+    if (Suppr_action($cont, $_GET['id'])) {
         $message = "Report successfully removed ! !";
     } else { $message = "Something went wrong !";
     }
-    listlast_action($cont, $twig, $message, $now);
-    listrss_action($cont, $twig, $message);
+    Listlast_action($cont, $twig, $message, $now);
+    Listrss_action($cont, $twig, $message);
     break;
 case "suppr_description":
-    require_auth();
-    if (suppr_description_action($cont, $_GET['id'])) {
+    Require_auth();
+    if (Suppr_Description_action($cont, $_GET['id'])) {
         $message = "Report detail successfully removed ! !";
     } else { $message = "Something went wrong !";
     }
-    listlast_action($cont, $twig, $message, $now);
-    listrss_action($cont, $twig, $message);
+    Listlast_action($cont, $twig, $message, $now);
+    Listrss_action($cont, $twig, $message);
     break;
 case "update":
-    require_auth();
+    Require_auth();
     if (!empty($_GET['id']) and !empty($_GET['date']) and !empty($_GET['title']) and !empty($_GET['maindescription'])) {
-        $res = update_action($cont, $_GET['id'], $_GET['date'], $_GET['title'], $_GET['maindescription'], $_GET['state']);
+        $res = Update_action($cont, $_GET['id'], $_GET['date'], $_GET['title'], $_GET['maindescription'], $_GET['state']);
     }
     if (!empty($res)) {
         $message = "Report successfully updated !";
     } else {
         $message = "Something went wrong !";
     }
-    listlast_action($cont, $twig, $message, $now);
-    listrss_action($cont, $twig, $message);
+    Listlast_action($cont, $twig, $message, $now);
+    Listrss_action($cont, $twig, $message);
     break;
 case "add":
-    require_auth();
-    if (add_action($cont, $_GET)) {
+    Require_auth();
+    if (Add_action($cont, $_GET)) {
         $message = "Report successfully added !";
     } else { $message = "Something went wrong !";
     }
-    listlast_action($cont, $twig, $message, $now);
-    listrss_action($cont, $twig, $message);
+    Listlast_action($cont, $twig, $message, $now);
+    Listrss_action($cont, $twig, $message);
     break;
 case "add_description":
-    require_auth();
-    if (add_description_action($cont, $_GET)) {
+    Require_auth();
+    if (Add_Description_action($cont, $_GET)) {
         $message = "Report detail successfully added !";
     } else { $message = "Something went wrong !";
     }
-    listlast_action($cont, $twig, $message, $now);
-    listrss_action($cont, $twig, $message);
+    Listlast_action($cont, $twig, $message, $now);
+    Listrss_action($cont, $twig, $message);
     break;
 default:
-    listpublic_action($cont, $twig, $message, $now);
+    Listpublic_action($cont, $twig, $message, $now);
 }

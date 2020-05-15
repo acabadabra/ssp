@@ -1,8 +1,10 @@
 <?php
 require_once 'models/Reports.class.php';
 
-// https://gist.github.com/rchrd2/c94eb4701da57ce9a0ad4d2b00794131
-function require_auth() 
+/**
+* https://gist.github.com/rchrd2/c94eb4701da57ce9a0ad4d2b00794131
+*/
+function Require_auth()
 {
     $AUTH_USER = 'admin';
     $AUTH_PASS = 'admin';
@@ -20,9 +22,9 @@ function require_auth()
     }
 }
 
-function listrss_action($cont,$twig,$message)
+function Listrss_action($cont,$twig,$message)
 {
-    $reports = $cont->get_rss();
+    $reports = $cont->Get_rss();
     $template = $twig->load('feed.xml.twig');
     $page_title="acab.io::status feed";
     $page_url="https://status.acab.io";
@@ -36,14 +38,14 @@ function listrss_action($cont,$twig,$message)
         )
     );
     $xmlfile = fopen('rss.xml', 'r+');
-    fseek($xmlfile, 0); // On remet le curseur au début du fichier
-    fputs($xmlfile, $content); // On écrit le nouveau nombre de pages vues
+    fseek($xmlfile, 0);
+    fputs($xmlfile, $content);
     fclose($xmlfile);
 }
 
-function listpublic_action($cont,$twig,$message)
+function Listpublic_action($cont,$twig,$message)
 {
-    $reports = $cont->get_public();
+    $reports = $cont->Get_public();
     $template = $twig->load('public.html.twig');
     $page_title="Last 5 reports";
     echo $template->render(
@@ -55,9 +57,9 @@ function listpublic_action($cont,$twig,$message)
     );
 }
 
-function listlast_action($cont,$twig,$message,$now)
+function Listlast_action($cont,$twig,$message,$now)
 {
-    $reports = $cont->get_last_reports();
+    $reports = $cont->Get_last_reports();
     $template = $twig->load('reports.html.twig');
     $page_title="Last 5 reports";
     echo $template->render(
@@ -70,9 +72,9 @@ function listlast_action($cont,$twig,$message,$now)
     );
 }
 
-function listall_action($cont,$twig,$message,$now)
+function Listall_action($cont,$twig,$message,$now)
 {
-    $reports = $cont->get_all_reports();
+    $reports = $cont->Get_all_reports();
     $template = $twig->load('reports.html.twig');
     $page_title="All reports";
     echo $template->render(
@@ -85,9 +87,9 @@ function listall_action($cont,$twig,$message,$now)
     );
 }
 
-function detail_action($cont,$twig,$now,$id,$message='')
+function Detail_action($cont,$twig,$now,$id,$message='')
 {
-    $report = $cont->get_report_by_id($id);
+    $report = $cont->Get_report_by_id($id);
     $template = $twig->load('report.html.twig');
     $page_title="Update report";
     echo $template->render(
@@ -100,25 +102,25 @@ function detail_action($cont,$twig,$now,$id,$message='')
     );
 }
 
-function suppr_action($cont,$id)
+function Suppr_action($cont,$id)
 {
-    return ($cont->delete_report_by_id($id));
+    return ($cont->Delete_report_by_id($id));
 }
-function suppr_description_action($cont, $id)
+function Suppr_Description_action($cont, $id)
 {
-    return ($cont->delete_description_by_id($id));
-}
-
-function update_action($cont,$id,$date,$page_title,$maindescription,$state)
-{
-    return ($cont->update($id, $date, $page_title, $maindescription, $state));
+    return ($cont->Delete_description_by_id($id));
 }
 
-function add_action($cont,$report)
+function Update_action($cont,$id,$date,$page_title,$maindescription,$state)
 {
-    return ($cont->add_report($report));
+    return ($cont->Update($id, $date, $page_title, $maindescription, $state));
 }
-function add_description_action($cont,$report)
+
+function Add_action($cont,$report)
 {
-    return ($cont->add_description_report($report));
+    return ($cont->Add_report($report));
+}
+function Add_Description_action($cont,$report)
+{
+    return ($cont->Add_description_report($report));
 }
