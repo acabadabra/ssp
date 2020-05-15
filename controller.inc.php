@@ -1,5 +1,5 @@
 <?php
-require_once 'models/model.php';
+require_once 'models/Reports.class.php';
 
 // https://gist.github.com/rchrd2/c94eb4701da57ce9a0ad4d2b00794131
 function require_auth() {
@@ -19,15 +19,33 @@ function require_auth() {
 	}
 }
 
+function listrss_action($cont,$twig,$message){
+	$reports = $cont->get_rss();
+  $template = $twig->load('feed.xml.twig');
+  $page_title="acab.io::status feed";
+	$page_url="https://status.acab.io";
+	$content = $template->render(array(
+	    'page_title' => $page_title,
+			'page_url' => $page_url,
+	    'reports' => $reports,
+			'bla' => $reports,
+	    'message' => $message,
+	    ));
+	$xmlfile = fopen('rss.xml', 'r+');
+	fseek($xmlfile, 0); // On remet le curseur au début du fichier
+	fputs($xmlfile, $content); // On écrit le nouveau nombre de pages vues
+	fclose($xmlfile);
+}
+
 function listpublic_action($cont,$twig,$message){
   $reports = $cont->get_public();
   $template = $twig->load('public.html.twig');
   $page_title="Last 5 reports";
   echo $template->render(array(
-            'page_title' => $page_title,
-            'reports' => $reports,
-            'message' => $message
-            ));
+    'page_title' => $page_title,
+    'reports' => $reports,
+    'message' => $message
+    ));
 }
 
 function listlast_action($cont,$twig,$message,$now){
@@ -35,11 +53,11 @@ function listlast_action($cont,$twig,$message,$now){
   $template = $twig->load('reports.html.twig');
   $page_title="Last 5 reports";
   echo $template->render(array(
-            'page_title' => $page_title,
-            'reports' => $reports,
-            'message' => $message,
-            'now' => $now
-            ));
+    'page_title' => $page_title,
+    'reports' => $reports,
+    'message' => $message,
+    'now' => $now
+    ));
 }
 
 function listall_action($cont,$twig,$message,$now){
@@ -47,11 +65,11 @@ function listall_action($cont,$twig,$message,$now){
   $template = $twig->load('reports.html.twig');
   $page_title="All reports";
   echo $template->render(array(
-            'page_title' => $page_title,
-            'reports' => $reports,
-            'message' => $message,
-            'now' => $now
-            ));
+    'page_title' => $page_title,
+    'reports' => $reports,
+    'message' => $message,
+    'now' => $now
+    ));
 }
 
 function detail_action($cont,$twig,$now,$id,$message=''){
@@ -59,11 +77,11 @@ function detail_action($cont,$twig,$now,$id,$message=''){
   $template = $twig->load('report.html.twig');
   $page_title="Update report";
   echo $template->render(array(
-            'page_title' => $page_title,
-            'report' => $report,
-            'now' => $now,
-            'message' => $message
-            ));
+    'page_title' => $page_title,
+    'report' => $report,
+    'now' => $now,
+    'message' => $message
+    ));
 }
 
 function suppr_action($cont,$id){
