@@ -5,7 +5,7 @@ class Reports {
 	/** DB connection */
 	private static $db;
 
-	/** DB conncection contructor */
+	/** DB connection contructor */
 	function __construct()
 	{
     $dsn = 'sqlite:db/reports.sqlite3';
