@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>{{ page_title }}</title>
+<link>{{ page_url }}</link>
+<atom:link href="{{ page_url }}/rss.xml" rel="self" type="application/rss+xml"></atom:link>
+<description>RSS feed</description>
+<language>en-us</language>
+{% for report in reports %}
+{% if loop.first %}
+{% set datemsg = report.MSGDATE|split('|') %}
+{% set datecycle = datemsg|length-1 %}
+{% if cycle(datemsg, i) is not empty %}
+{% for i in 0..datecycle %}
+{% if loop.last %}
+<pubDate>{{ cycle(datemsg, i)|date("D, d M Y H:i:s T") }}</pubDate>
+<lastBuildDate>{{ cycle(datemsg, i)|date("D, d M Y H:i:s T") }}</lastBuildDate>
+{% endif %}
+{% endfor %}
+{% else %}
+<pubDate>{{ report.DATE|date("D, d M Y H:i:s T") }}</pubDate>
+<lastBuildDate>b{{ report.DATE|date("D, d M Y H:i:s T") }}</lastBuildDate>
+{% endif %}
+{% endif %}
+{% set descriptions = report.MSGDESCRIPTION|split('|') %}
+{% set date = report.MSGDATE|split('|') %}
+{% set nbcycle = descriptions|length-1 %}
+{% if cycle(date, i) is not empty %}
+{% for i in 0..nbcycle %}
+<item>
+<title>{{ report.TITLE }}</title>
+<description>{{ cycle(descriptions, i) }}</description>
+<pubDate>{{ cycle(date, i)|date("D, d M Y H:i:s T") }}</pubDate>
+<link>{{ page_url }}</link>
+</item>
+{% endfor %}
+{% endif %}
+<item>
+<title>{{ report.TITLE }}</title>
+<description>{{ report.MAINDESCRIPTION }}</description>
+<pubDate>{{ report.DATE|date("D, d M Y H:i:s T") }}</pubDate>
+<link>{{ page_url }}</link>
+</item>
+{% endfor %}
+</channel>
+</rss>
