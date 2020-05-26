@@ -7,7 +7,7 @@ $loader = new Twig\Loader\FilesystemLoader('templates');
 // On your mark Twig !
 $twig = new Twig\Environment($loader);
 
-require 'controller.inc.php';
+require 'controllers/controller.inc.php';
 // Checking actions and parameters
 // default to Listpublic
 $action = $_GET['action'] ?? 'listpublic';

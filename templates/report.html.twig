@@ -4,7 +4,7 @@
 {% block content %}
 
   <h2>{{ titre }}</h2>
-  <form action="controller.php">
+  <form action="index.php">
     <input type="hidden" name="action" value="update">
     <input type="hidden" name="id" value="{{ report.ID }}">
     
@@ -33,7 +33,7 @@
     </button>
   </form>
   <hr />
-  <form action="controller.php">
+  <form action="index.php">
     <input type="hidden" name="action" value="add_description">
     <input type="hidden" name="report_id" value="{{report.ID}}">
     

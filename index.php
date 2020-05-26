@@ -1,2 +1,2 @@
 <?php
-require 'controller.php';
+require 'controllers/controller.php';

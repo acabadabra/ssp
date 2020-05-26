@@ -7,7 +7,7 @@
 {% block content %}
 
   <h2>Add report</h2>
-  <form method="GET" action="controller.php">
+  <form method="GET" action="index.php">
     <input type="hidden" name="action" value="add">
     <p>
       <label for="date">Date :</label>
@@ -26,7 +26,7 @@
   </form>
 
   <h2>{{ page_title }}</h2>
-  <p><a href="./controller.php?action=listall">Show all reports</a></p>
+  <p><a href="./index.php?action=listall">Show all reports</a></p>
   
   {% for report in reports %}
 
@@ -52,9 +52,9 @@
     </div>
     <div class="report-messages">
       <h3>
-        <a href="controller.php?action=detail&id={{report.ID}}&message="><i class="far fa-edit"></i></a>
+        <a href="index.php?action=detail&id={{report.ID}}&message="><i class="far fa-edit"></i></a>
         {{ report.TITLE }}
-        <a href="controller.php?action=suppr&id={{report.ID}}"><i class="fas fa-trash"></i></a>
+        <a href="index.php?action=suppr&id={{report.ID}}"><i class="fas fa-trash"></i></a>
       </h3>
       <p>{{ report.MAINDESCRIPTION }}</p>
       {% if cycle(date, i) is not empty %}
@@ -64,7 +64,7 @@
             <span class="message-date">{{ cycle(date, i) }}</span>
           </p>
           <p class="txt-rendering">
-            {{ cycle(descriptions, i) }} <br /> <a href="controller.php?action=suppr_description&id={{ cycle(id, i) }}"><i class="fas fa-trash"></i></a>
+            {{ cycle(descriptions, i) }} <br /> <a href="index.php?action=suppr_description&id={{ cycle(id, i) }}"><i class="fas fa-trash"></i></a>
           </p>
         {% endfor %}
       {% endif %}
