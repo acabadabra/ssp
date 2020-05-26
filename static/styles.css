@@ -68,6 +68,7 @@ header h1 a {
   background-color: #EEE;
   color: #111;
   width:90%;
+  max-width: 800px;
   margin:2em auto;
   border-radius: 1em;
   border: solid 1px grey;
