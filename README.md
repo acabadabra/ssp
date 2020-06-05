@@ -26,5 +26,5 @@ It can easily be used by other projects.
 - ~~RSS feed~~
 - ~~Keep new line on textarea~~
 - Use a config file
-- Internationalize
+- Internationalization
 - mail alerts on update ?
